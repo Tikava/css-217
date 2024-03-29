@@ -1,0 +1,1 @@
+This repository stores assignments of course CSS 217 (Software Architecture and Design Patterns).
