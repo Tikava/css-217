@@ -1,0 +1,5 @@
+{
+    "db_name": "my_db",
+    "user": "postgres",
+    "password": "new_password"
+}
