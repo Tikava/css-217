@@ -35,15 +35,15 @@ class DataStorage:
                 (name, ', '.join(artists), album, preview_url))
         self.conn.commit()
 
-    def store_video(self, name, artists, album, preview_url):
+    def store_video(self, title, description, channel_title, published_at):
         self.connect()
         c = self.conn.cursor()
 
         c.execute('''CREATE TABLE IF NOT EXISTS video_info
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, artists TEXT, album TEXT, preview_url TEXT)''')
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, channel_title TEXT, published_at TEXT)''')
 
-        c.execute("INSERT INTO video_info (name, artists, album, preview_url) VALUES (?, ?, ?, ?)",
-                (name, ', '.join(artists), album, preview_url))
+        c.execute("INSERT INTO video_info (title, description, channel_title, published_at) VALUES (?, ?, ?, ?)",
+                (title, description, channel_title, published_at))
         self.conn.commit()
 
     def close(self):
