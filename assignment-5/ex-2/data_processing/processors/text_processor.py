@@ -1,5 +1,4 @@
-from base_processor import DataProcessor
-
+from data_processing.processors.base_processor import DataProcessor
 
 class TextProcessor:
     def __init__(self, data):
