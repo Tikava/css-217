@@ -1,3 +1,6 @@
 class VideoContent:
-    def __init__(self, video_data):
-        self.video_data = video_data
+    def __init__(self, title, description, channel_title, published_at):
+        self.title = title
+        self.description = description
+        self.channel_title = channel_title
+        self.published_at = published_at
