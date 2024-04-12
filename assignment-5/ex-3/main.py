@@ -3,6 +3,7 @@ from factory.factory_impl import (
     TraditionalWoodFactory, TraditionalMetalFactory, TraditionalGlassFactory,
     IndustrialWoodFactory, IndustrialMetalFactory, IndustrialGlassFactory
 )
+from furniture_creator import FurnitureCreator
 
 def main():
     print("Welcome to the Furniture Factory!")
@@ -46,9 +47,12 @@ def prompt_user(prompt, options):
         print("Invalid input. Please try again.")
 
 def create_and_display_furniture(factory):
-    chair = factory.create_chair()
-    table = factory.create_table()
-    sofa = factory.create_sofa()
+    creator = FurnitureCreator()
+    creator.set_factory(factory)
+
+    chair = creator.create_chair()
+    table = creator.create_table()
+    sofa = creator.create_sofa()
 
     print("\nFurniture created by", type(factory).__name__)
     print("Chair:", chair)
