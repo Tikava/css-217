@@ -6,16 +6,17 @@ from data_processing.processors.video_processor import VideoDataProcessor
 from data_processing.data import Data
 from data_processing.fetchers.audio_fetcher import AudioFetcher
 from data_processing.fetchers.video_fetcher import VideoFetcher
-from config.config import spotify_client_id, spotify_client_secret, youtube_data_api_key
+from data_processing.fetchers.text_fetcher import ResearchArticleFetcher
+from config.config import spotify_client_id, spotify_client_secret, youtube_data_api_key, ieee_xplore_api_key
 
 
 def main():
     
     audio_fethcer = AudioFetcher(spotify_client_id, spotify_client_secret)
     video_fetcher = VideoFetcher(youtube_data_api_key)
+    text_fetcher = ResearchArticleFetcher(ieee_xplore_api_key)
 
     processor_creator = DataProcessorCreator()
-
 
     print("Choose data type to process:")
     print("1. Text")
@@ -25,10 +26,14 @@ def main():
     choice = input("Enter your choice (1/2/3): ")
 
     if choice == "1":
-        text_data = input("Enter the text you want to process: ")
-        data = Data("text", text_data)
-        processor_creator.set_processor(TextDataProcessor())
-        processor_creator.process_data(data)
+        query = input("Enter the title of article you want to find: ")
+        article_info = text_fetcher.search_articles(query)
+        if (article_info):
+            data = Data("text", article_info)
+            processor_creator.set_processor(TextDataProcessor())
+            processor_creator.process_data(data)
+        else:
+            print("Failed to find specified article.")
     elif choice == "2":
         music_name = input("Enter music name that you are looking for and to store in database: ")
         music_info = audio_fethcer.search_track(music_name)
