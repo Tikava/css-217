@@ -14,15 +14,28 @@ class DataStorage:
         if not self.conn:
             self.conn = sqlite3.connect(self.db_file)
 
-    def store_text(self, text):
+    def store_article(self, title, authors, publication_year, abstract, doi, journal, volume, issue, pages, keywords):
         self.connect()
         c = self.conn.cursor()
 
-        c.execute('''CREATE TABLE IF NOT EXISTS text_info
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT)''')
+        c.execute('''CREATE TABLE IF NOT EXISTS articles
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                    title TEXT, 
+                    authors TEXT,
+                    publication_year INTEGER,
+                    abstract TEXT,
+                    doi TEXT,
+                    journal TEXT,
+                    volume INTEGER,
+                    issue INTEGER,
+                    pages TEXT,
+                    keywords TEXT)''')
 
-        c.execute("INSERT INTO text_info (text) VALUES (?)", (text,))
+        c.execute("INSERT INTO articles (title, authors, publication_year, abstract, doi, journal, volume, issue, pages, keywords) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (title, authors, publication_year, abstract, doi, journal, volume, issue, pages, keywords))
+        
         self.conn.commit()
+        self.conn.close()
 
     def store_audio(self, name, artists, album, preview_url):
         self.connect()
