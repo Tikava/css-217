@@ -3,7 +3,7 @@ class Author:
         self.name = name
 
 class Book:
-    def __init__(self, title, author, isbn):
+    def __init__(self, title, authors, isbn):
         self.title = title
-        self.author = author
+        self.authors = authors
         self.isbn = isbn
