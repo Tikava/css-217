@@ -1,17 +1,15 @@
-import requests
+from facade import WeatherFacade
 
-from config import config
+def main():
+    facade = WeatherFacade()
+    location = "Almaty"
+    api = "api2"
+    weather_data = facade.get_weather(location, api)
+    if weather_data:
+        print('Temp. info: ', weather_data.temp_info)
+        print('Wind info: ', weather_data.wind_info)
+        print('Humidity: ', weather_data.humidity)
 
-#first api
 
-url = "https://api.weatherapi.com/v1/current.json"
-res = requests.get(url=url, params=dict(q='Almaty', key=f'{config.WEATHERAPI_KEY}')).json()
-print(res['location']['name'])
-
-
-
-#second api
-
-url = "https://api.openweathermap.org/data/2.5/weather"
-res = requests.get(url=url, params=dict(appid=f"{config.OPENWEATHER_KEY}", q='Almaty')).json()
-print(res['name'])
+if __name__ == '__main__':
+    main()
