@@ -1,1 +1,3 @@
-This repository stores assignments of course CSS 217 (Software Architecture and Design Patterns).
+# To Read:
+- [Refactoring Guru](https://refactoring.guru/design-patterns/)
+- https://12factor.net/
